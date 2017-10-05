@@ -48,11 +48,47 @@ CREATE TABLE IF NOT EXISTS usuarios (
     UNIQUE KEY idu_username (username)
 ) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
 
+CREATE TABLE IF NOT EXISTS editoriales (
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(200) NOT NULL,
+    pais_id INT UNSIGNED NOT NULL,
+    domicilio VARCHAR(200) NOT NULL,
+    telefono VARCHAR(30) NOT NULL,
+    email VARCHAR(200) NOT NULL DEFAULT 'sin@correo',
+    web VARCHAR(200) NOT NULL DEFAULT 'http://sin.web/',
+    CONSTRAINT fk_editoriales_paises
+		FOREIGN KEY (pais_id)
+        REFERENCES paises (id)
+			ON DELETE RESTRICT
+            ON UPDATE CASCADE
+) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
 
+CREATE TABLE IF NOT EXISTS personas (
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombres VARCHAR(50) NOT NULL,
+    apellidos VARCHAR(50) NOT NULL,
+    curp CHAR(18) NOT NULL,
+    fecha_nacimiento DATE NOT NULL,
+    tipo_persona_id INT UNSIGNED NOT NULL,
+    CONSTRAINT fk_personas_tipo_personas
+		FOREIGN KEY (tipo_persona_id)
+        REFERENCES tipo_personas (id)
+			ON DELETE RESTRICT
+            ON UPDATE CASCADE
+) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
-
-
+CREATE TABLE IF NOT EXISTS alumnos (
+	persona_id INT UNSIGNED PRIMARY KEY,
+    no_control CHAR(14) NOT NULL,
+    generacion CHAR(9) NOT NULL,
+    turno ENUM('MATUTINO','VESPERTINO'),
+    carrera VARCHAR(200) NOT NULL,
+    CONSTRAINT fk_alumnos_personas
+		FOREIGN KEY (persona_id)
+        REFERENCES personas (id)
+			ON DELETE RESTRICT
+            ON UPDATE CASCADE
+) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 
