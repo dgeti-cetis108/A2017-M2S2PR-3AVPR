@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS idiomas (
 
 CREATE TABLE IF NOT EXISTS tipo_personas (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    descripcion ENUM('DOCENTE','ALUMNO','ADMINISTRATIVO','OTROS') NOT NULL
+    descripcion ENUM('DOCENTE','ESTUDIANTE','ADMINISTRATIVO','OTROS') NOT NULL
 ) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -89,6 +89,54 @@ CREATE TABLE IF NOT EXISTS alumnos (
 			ON DELETE RESTRICT
             ON UPDATE CASCADE
 ) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS libros (
+	id INT UNSIGNED PRIMARY KEY,
+    isbn CHAR(17) NOT NULL DEFAULT '',
+    titulo VARCHAR(200) NOT NULL,
+    editorial_id INT UNSIGNED NOT NULL,
+    año_edicion YEAR NOT NULL,
+    paginas SMALLINT(4) UNSIGNED NOT NULL,
+    idioma_id INT UNSIGNED NOT NULL,
+    categoria_id INT UNSIGNED NOT NULL,
+    CONSTRAINT fk_libros_editoriales
+		FOREIGN KEY (editorial_id)
+		REFERENCES editoriales (id)
+			ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+	CONSTRAINT fk_libros_idiomas
+		FOREIGN KEY (idioma_id)
+        REFERENCES idiomas (id)
+			ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+	CONSTRAINT fk_libros_categorias
+		FOREIGN KEY (categoria_id)
+        REFERENCES categorias (id)
+			ON DELETE RESTRICT
+            ON UPDATE CASCADE
+) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS libros_has_autores (
+	libro_id INT UNSIGNED,
+    autor_id INT UNSIGNED,
+    PRIMARY KEY (libro_id, autor_id),
+    CONSTRAINT fk_libros_autores
+		FOREIGN KEY (autor_id)
+        REFERENCES autores (id)
+			ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+	CONSTRAINT fk_autores_libros
+		FOREIGN KEY (libro_id)
+        REFERENCES libros (id)
+			ON DELETE RESTRICT
+            ON UPDATE CASCADE
+) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+
+
+
+
 
 
 
