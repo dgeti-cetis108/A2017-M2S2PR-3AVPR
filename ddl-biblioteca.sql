@@ -132,7 +132,24 @@ CREATE TABLE IF NOT EXISTS libros_has_autores (
             ON UPDATE CASCADE
 ) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
+CREATE TABLE IF NOT EXISTS prestamos (
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT UNSIGNED NOT NULL,
+    persona_id INT UNSIGNED NOT NULL,
+    fecha_salida DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_regreso DATETIME NOT NULL DEFAULT '1999-01-01',
+    grupo_actual CHAR(7) NOT NULL,
+    CONSTRAINT fk_prestamos_usuarios
+		FOREIGN KEY (usuario_id)
+        REFERENCES usuarios (id)
+			ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+	CONSTRAINT fk_prestamos_personas
+		FOREIGN KEY (persona_id)
+        REFERENCES personas (id)
+			ON DELETE RESTRICT
+            ON UPDATE CASCADE
+) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 
