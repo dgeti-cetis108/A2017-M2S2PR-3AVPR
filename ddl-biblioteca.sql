@@ -151,7 +151,11 @@ CREATE TABLE IF NOT EXISTS prestamos (
             ON UPDATE CASCADE
 ) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
+CREATE TABLE IF NOT EXISTS prestamos_has_libros (
+	prestamo_id INT UNSIGNED,
+    libro_id INT UNSIGNED,
+    PRIMARY KEY (prestamo_id, libro_id)
+) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 
