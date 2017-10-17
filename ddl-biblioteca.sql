@@ -7,8 +7,8 @@
 -- autores,libros,editoriales,idiomas,paises,usuarios,
 -- personas,alumnos,prestamo,tipo_persona
 
-CREATE DATABASE IF NOT EXISTS biblioteca;
-USE biblioteca;
+CREATE DATABASE IF NOT EXISTS biblioteca_cetis108;
+USE biblioteca_cetis108;
 
 CREATE TABLE IF NOT EXISTS autores (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
