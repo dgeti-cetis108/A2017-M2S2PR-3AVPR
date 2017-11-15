@@ -1,0 +1,42 @@
+Escribe en un comentario tu nombre de usuario en GitHub.
+Con este dato se revisará la siguiente lista de cotejo:
+1. ¿Tiene cuenta de usuario en Github?
+
+2. ¿Aceptó la asignación 2017-1 M2S2 3AV-PR Base de datos avanzadas?
+	https://classroom.github.com/a/X8IQHFQh
+
+3. ¿Sincronizó el código fuente local al repositorio remoto?
+
+4. ¿Cuenta con el archivo con sentencias DDL?
+4.1 ¿El archivo presenta errores de sintaxis?
+4.2 ¿Arrojó errores la ejecución del archivo DDL?
+
+5. ¿Cuenta con los archivos generados en mokaroo.com?
+5.1 ¿Uno por cada tabla?
+5.2 ¿Uno o más archivos presentan errores de sintaxis?
+5.3 ¿Uno o más archivos tuvieron errores al ejecutarse?
+
+6. ¿Cuenta con archivo de consultas?
+6.1 ¿El archivo presenta errores de sintaxis?
+6.2 ¿Arrojó errores la ejecución del archivo de consultas?
+
+7. ¿Se entregó en tiempo y forma la asignación a Edmodo?
+
+Consultas que debe contener el archivo consultas.sql
+# Consulta que devuelva todos los registros de la tabla usuarios
+# Consulta que devuelva todos los registros donde el id sea mayor que 10
+# Consulta que devuelva todos los registros con el id entre 10 y 50
+# Consulta que devuelva todos los registros con valores opuestos a la anterior consulta
+# Consulta para validar que el usuario y la contraseña dadas son correctas y existen en la tabla usuarios (debe regresar id,nombre,apellidos)
+# Consulta que devuelva cuantos paises estan registrados
+# Consulta que devuelva el id del país Mexico en caso de existir
+# Consulta que devuelva cuantas editoriales existen
+# Consulta que devuelva cuantas editoriales de Mexico existen
+# Consulta que devuelva cuales categorías existen
+# Consulta que devuelva cuantos libros hay por cada categoria
+# Consulta que devuelva cuantos usuarios existen que su nombre inicie con la letra a
+# Consulta que devuelva los nombres de usuarios que el mismo inicie con la letra a
+# Consulta que devuelva los nombres de usuarios que el mismo termine con la letra a
+# Consulta que muestre la lista de usuarios (id, nombre, apellidos, username)
+# Consulta que permita cambiar la contraseña de un usuario
+# Consulta para cambiar nombre y apellidos de un usuario

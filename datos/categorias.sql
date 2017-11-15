@@ -1,0 +1,10 @@
+insert into categorias (nombre) values ('Beauty');
+insert into categorias (nombre) values ('Movies');
+insert into categorias (nombre) values ('Tools');
+insert into categorias (nombre) values ('Toys');
+insert into categorias (nombre) values ('Home');
+insert into categorias (nombre) values ('Clothing');
+insert into categorias (nombre) values ('Outdoors');
+insert into categorias (nombre) values ('Kids');
+insert into categorias (nombre) values ('Health');
+insert into categorias (nombre) values ('Games');
