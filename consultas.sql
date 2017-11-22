@@ -91,6 +91,41 @@ UPDATE usuarios SET
 WHERE
 	id = 1;
 
+# Consulta que devuelva cuantos libros hay por cada categoria
+SELECT
+	c.*,
+	(SELECT COUNT(id) FROM libros WHERE categoria_id = c.id) as 'libros'
+FROM categorias c;
+
+# Consulta que devuelva cuantos libros tiene cada autor
+SELECT
+	concat(a.nombre, ' ', a.apellidos) as 'autor',
+	(SELECT COUNT(libro_id) FROM libros_has_autores WHERE autor_id = a.id) as 'libros'
+FROM autores a;
+
+# Consulta que devuelva cuantos autores tiene cada libro
+SELECT
+	l.titulo as 'libro',
+	(SELECT COUNT(autor_id) FROM libros_has_autores WHERE libro_id = l.id) as 'libros'
+FROM libros l;
+
+# Consulta que devuelva el nombre de editoriales y nombre de pais al que pertenece
+SELECT
+	e.nombre as 'editorial',
+	(SELECT nombre FROM paises WHERE id = e.pais_id) as 'pais'
+FROM editoriales e;
+
+# Consulta que devuelva el total de editoriales por pais con el total de libros editados
+# ordenados por editoriales y libros de forma descendente
+SELECT
+	nombre as 'pais',
+	(SELECT COUNT(id) FROM editoriales WHERE pais_id = p.id) as 'editoriales',
+	(SELECT COUNT(id) FROM libros WHERE editorial_id
+		IN (SELECT id FROM editoriales WHERE pais_id = p.id)
+	) as 'libros'
+FROM paises p
+ORDER BY
+	editoriales DESC, libros DESC;
 
 
 
