@@ -156,5 +156,28 @@ RIGHT JOIN paises p ON p.id = e.pais_id
 WHERE	e.id IS NULL
 ORDER BY 	p.id;
 
+# Consulta que muestre todos los paises con o sin editoriales
+SELECT
+	p.id as 'pais_id',
+	p.nombre as 'pais',
+	IF(e.id IS NULL, 'NO', 'SI') as 'tiene_editorial'
+FROM paises p
+LEFT JOIN editoriales e ON
+	p.id = e.pais_id;
+
+# Consulta que devuelva paises donde haya editoriales vinculadas a estos
+SELECT
+	p.id as 'pais_id',
+	p.nombre as 'pais'
+FROM paises p
+LEFT JOIN editoriales e ON	p.id = e.pais_id
+WHERE	e.id IS NOT NULL
+GROUP BY p.id
+ORDER BY 	p.id;
+
+
+
+
+
 
 
