@@ -129,3 +129,32 @@ ORDER BY
 
 
 
+# Consulta que devuelva registros de editoriales y el nombre de pais
+SELECT
+	e.id as 'editorial_id',
+	e.nombre as 'editorial',
+	p.nombre as 'pais'
+FROM editoriales e
+INNER JOIN paises p ON
+	e.pais_id = p.id;
+
+# Consulta que devuelva los paises que no tengan editoriales registradas
+SELECT
+	p.id as 'pais_id',
+	p.nombre as 'pais'
+FROM paises p
+LEFT JOIN editoriales e ON	p.id = e.pais_id
+WHERE	e.id IS NULL
+ORDER BY 	p.id;
+
+# Reliza la consulta anterior utilizando RIGHT JOIN
+SELECT
+	p.id as 'pais_id',
+	p.nombre as 'pais'
+FROM editoriales e
+RIGHT JOIN paises p ON p.id = e.pais_id
+WHERE	e.id IS NULL
+ORDER BY 	p.id;
+
+
+
