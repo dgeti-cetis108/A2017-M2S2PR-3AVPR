@@ -176,6 +176,52 @@ GROUP BY p.id
 ORDER BY 	p.id;
 
 
+# Consulta que muestre los libros registrados, idioma, categoria, editorial y pais de editorial
+SELECT
+	l.isbn,
+	l.titulo,
+	l.año_edicion,
+	i.nombre as 'idioma',
+	c.nombre as 'categoria',
+	e.nombre as 'editorial',
+	p.nombre as 'pais_editorial'
+FROM libros l
+	INNER JOIN idiomas i ON l.idioma_id = i.id
+	INNER JOIN categorias c ON l.categoria_id = c.id
+	INNER JOIN editoriales e ON l.editorial_id = e.id
+		INNER JOIN paises p ON e.pais_id = p.id;
+
+# Consulta M:M que muestre los libros registrados con sus respectivos autores
+SELECT
+	l.isbn,
+	l.titulo,
+	l.año_edicion,
+	a.nombre as 'autor'
+FROM libros_has_autores la
+	INNER JOIN autores a ON la.autor_id = a.id
+	INNER JOIN libros l ON la.libro_id = l.id;
+	
+# Consulta que muestre los libros registrados, idioma, categoria, editorial y pais de editorial, asi como el nombre de los autores y correo electronico del mismo
+SELECT
+	l.isbn,
+	l.titulo,
+	l.año_edicion,
+	i.nombre as 'idioma',
+	c.nombre as 'categoria',
+	e.nombre as 'editorial',
+	p.nombre as 'pais_editorial',
+	CONCAT(a.nombre, ' ', a.apellidos) as 'autor',
+	a.email as 'correo-electronico'
+FROM libros l
+	INNER JOIN idiomas i ON l.idioma_id = i.id
+	INNER JOIN categorias c ON l.categoria_id = c.id
+	INNER JOIN editoriales e ON l.editorial_id = e.id
+		INNER JOIN paises p ON e.pais_id = p.id
+	INNER JOIN libros_has_autores la ON l.id = la.libro_id
+		INNER JOIN autores a ON la.autor_id = a.id;
+
+
+DESCRIBE autores;
 
 
 
