@@ -220,8 +220,48 @@ FROM libros l
 	INNER JOIN libros_has_autores la ON l.id = la.libro_id
 		INNER JOIN autores a ON la.autor_id = a.id;
 
+# Consulta que muestre los libros registrados, idioma, categoria, editorial y pais de editorial, asi como el nombre de los autores (separados por coma) en una sola fila por libro
+SELECT
+	l.isbn,
+	l.titulo,
+	l.año_edicion,
+	i.nombre as 'idioma',
+	c.nombre as 'categoria',
+	e.nombre as 'editorial',
+	p.nombre as 'pais_editorial',
+	GROUP_CONCAT(CONCAT(a.nombre, ' ', a.apellidos)) as 'autor'
+FROM libros l
+	INNER JOIN idiomas i ON l.idioma_id = i.id
+	INNER JOIN categorias c ON l.categoria_id = c.id
+	INNER JOIN editoriales e ON l.editorial_id = e.id
+		INNER JOIN paises p ON e.pais_id = p.id
+	INNER JOIN libros_has_autores la ON l.id = la.libro_id
+		INNER JOIN autores a ON la.autor_id = a.id
+GROUP BY
+	la.libro_id;
 
-DESCRIBE autores;
+# Consulta que devuelva el total de libros por categoria en existencia (nombre de categoria, total de libros)
+SELECT
+	c.nombre as 'categoria',
+	COUNT(l.id) as 'total-libros'
+FROM categorias c
+INNER JOIN libros l ON c.id = l.categoria_id
+GROUP BY c.id;
+
+# Consulta que devuelva el total de libros prestados en septiembre de 2017
+SELECT
+	COUNT(pl.libro_id) as 'total-libros'
+FROM prestamos_has_libros pl
+INNER JOIN prestamos p ON pl.prestamo_id = p.id
+WHERE
+	p.fecha_salida BETWEEN '2017-09-01 00:00:00' AND '2017-09-30 23:59:59';
+	
+# Consulta que devuelva el total de libros por mes entre agosto y noviembre 2017
+
+
+
+
+
 
 
 
